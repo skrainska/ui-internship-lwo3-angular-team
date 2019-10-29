@@ -20,8 +20,8 @@ import { ScrollAnchorDirective } from './shared/directives';
   templateUrl: './app.html'
 })
 export class AppComponent implements OnInit, OnDestroy {
-  @ViewChildren(ScrollAnchorDirective)
-    private pageAnchors: QueryList<ScrollAnchorDirective>;
+  // @ViewChildren(ScrollAnchorDirective)
+  //   private pageAnchors: QueryList<ScrollAnchorDirective>;
 
   constructor(
     private store: Store<IAppState>,
@@ -43,10 +43,11 @@ export class AppComponent implements OnInit, OnDestroy {
       filter(event => event instanceof NavigationEnd)
     )
     .subscribe(() => {
+      // console.log('hi');
       this.scrollService.resetAnchors();
-      this.pageAnchors.forEach(el =>
-        this.scrollService.addAnchor(el.elementReference));
-      this.scrollService.moveTo({ selector: 'app-header', title: '' });
+      
+      // this.pageAnchors.forEach(el => el.addToScrollService());
+      this.scrollService.moveTo({ title: 'Header' });
       this.isHomePage = window.location.pathname === '/home';
     });
   }

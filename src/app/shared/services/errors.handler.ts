@@ -19,7 +19,7 @@ export class ErrorsHandler implements ErrorHandler {
         notificationService.error(`HTTP error: ${error.status}`, error.message);
       }
     } else {
-      router.navigate(['/error'], { queryParams: { error } });
+      // router.navigate(['/error'], { queryParams: { error } });
     }
   }
 }

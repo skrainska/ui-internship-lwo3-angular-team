@@ -51,6 +51,7 @@ export class ScrollService implements OnDestroy {
 
   public resetAnchors(): void {
     this.anchorRefs = [];
+    this.anchors.next([]);
   }
 
   public moveTo(anchor: IPageAnchor): void {
@@ -60,14 +61,13 @@ export class ScrollService implements OnDestroy {
 
   private getAnchor(elRef: ElementRef): IPageAnchor {
     return {
-      selector: elRef.nativeElement.localName,
-      title: elRef.nativeElement.title
+      title: elRef.nativeElement.getAttribute('appScrollAnchor')
     };
   }
 
   private selectRef(anchor: IPageAnchor): ElementRef {
     return this.anchorRefs.find(el =>
-      el.nativeElement.localName === anchor.selector
+      el.nativeElement.getAttribute('appScrollAnchor') === anchor.title
     );
   }
 

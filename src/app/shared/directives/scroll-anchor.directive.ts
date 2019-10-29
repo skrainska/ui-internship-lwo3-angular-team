@@ -1,12 +1,25 @@
-import { Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef, AfterViewInit, AfterContentInit, Input } from '@angular/core';
+
+import { ScrollService } from '../services';
 
 @Directive({
-  selector: '[appScrollAnchor], app-header, app-footer'
+  selector: '[appScrollAnchor]'
 })
-export class ScrollAnchorDirective {
-  public elementReference: ElementRef;
+export class ScrollAnchorDirective implements AfterContentInit {
+  @Input('appScrollAnchor') title: string;
 
-  constructor(elr: ElementRef) {
-    this.elementReference = elr;
+  constructor(
+    private elementReference: ElementRef,
+    private scrollService: ScrollService
+  ) {
+    console.log('kek', this.elementReference);
+  }
+
+  public ngAfterContentInit(): void {
+   this.addToScrollService();
+  }
+
+  public addToScrollService(): void {
+    this.scrollService.addAnchor(this.elementReference);
   }
 }

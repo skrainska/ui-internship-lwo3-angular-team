@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LocalStorageService } from '../../shared/services/web-storage/local-storage.service';
-import { ProductService } from 'src/app/shared/services';
-import { ProductFormat } from 'src/app/app.enum';
+
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { Subscription, forkJoin} from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+
+import { LocalStorageService } from 'src/app/shared/services/web-storage/local-storage.service';
+import { ProductService } from 'src/app/shared/services';
+import { ProductFormat } from 'src/app/app.enum';
 import { IProductShortInfo } from 'src/app/interfaces';
 
 @AutoUnsubscribe()
@@ -17,7 +19,7 @@ export class RecentlyViewedComponent implements OnInit, OnDestroy {
   constructor(
     private localStorageService: LocalStorageService,
     private productService: ProductService,
-    ) { }
+  ) { }
 
   public recentlyViewedProducts: Array<IProductShortInfo> = [];
   public recentProductsSub: Subscription;
